@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Veritas AI Face Rating System</title>
+    <style>
+        /* Add your custom styles here */
+        .progress {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            transition: width 2s;
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello, World!</h1>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4 text-center">Cyberpunk Face Rating</h1>
+        <input type="file" id="photo-upload" class="mb-4" accept="image/*" />
+        <div class="progress mb-4"><div class="progress-bar bg-green-600" style="width: 0;"></div></div>
+        <button id="submit-button" class="bg-blue-500 text-white px-4 py-2 rounded">Rate My Face</button>
+        <div id="result" class="mt-4 text-center hidden"></div>
+    </div>
+
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function() {
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                const results = ['Unappealing', 'Mediocre', 'Terrible'];
+                const roasts = [
+                    'Not even AI can save this.',
+                    'Is that a face or a mistake?',
+                    'Even a bot would cringe.'
+                ];
+                const randomIndex = Math.floor(Math.random() * results.length);
+                const randomRoast = Math.random() < 0.5 ? roasts[randomIndex] : 'Definitely not a 10!';
+                document.getElementById('result').innerText = `Rating: ${results[randomIndex]} - ${randomRoast}`;
+                document.getElementById('result').classList.remove('hidden');
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
